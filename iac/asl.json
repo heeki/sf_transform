@@ -1,0 +1,18 @@
+{
+    "StartAt": "Input",
+    "States": {
+        "Input": {
+            "Type": "Pass",
+            "Next": "Logic"
+        },
+        "Logic": {
+            "Type": "Task",
+            "Resource": "${Fn}",
+            "Next": "Output"
+        },
+        "Output": {
+            "Type": "Pass",
+            "End": true
+        }
+    }
+}
