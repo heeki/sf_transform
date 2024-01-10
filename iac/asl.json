@@ -8,6 +8,11 @@
         "Logic": {
             "Type": "Task",
             "Resource": "${Fn}",
+            "ResultSelector": {
+                "transformed.$": "$.objects[*].key"
+            },
+            "ResultPath": "$.result",
+            "OutputPath": "$",
             "Next": "Output"
         },
         "Output": {
