@@ -23,6 +23,10 @@ sf.list:
 	aws --profile ${PROFILE} stepfunctions list-executions --state-machine-arn ${O_SF_ARN} | jq -c '.executions[] | del(.executionArn, .stateMachineArn)'
 sf.list.aborted:
 	aws --profile ${PROFILE} stepfunctions list-executions --state-machine-arn ${O_SF_ARN} --status-filter ABORTED | jq -c '.executions[] | del(.executionArn, .stateMachineArn)'
+sf.describe:
+	aws --profile ${PROFILE} stepfunctions describe-execution --execution-arn ${O_SF_EXEC_ARN} | jq 'del(.input)'
+sf.history:
+	aws --profile ${PROFILE} stepfunctions get-execution-history --execution-arn ${O_SF_EXEC_ARN} | jq 'walk(if type=="object" and has("input") then del(.input) else . end) | walk(if type=="object" and has("output") then del(.output) else . end)' | jq -c '.events[]'
 sf.stop:
 	aws --profile ${PROFILE} stepfunctions stop-execution --execution-arn ${O_SF_EXEC_ARN} --error 418 --cause "pausing execution" | jq
 	aws --profile ${PROFILE} stepfunctions describe-execution --execution-arn ${O_SF_EXEC_ARN} | jq

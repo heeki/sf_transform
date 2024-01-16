@@ -9,3 +9,6 @@ etc/*.sh
 *_output.yaml
 build.toml
 notes.md
+
+# inclusions
+!etc/event.json

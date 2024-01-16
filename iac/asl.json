@@ -9,10 +9,14 @@
             "Type": "Task",
             "Resource": "${Fn}",
             "ResultSelector": {
-                "transformed.$": "$.objects[*].key"
+                "output": {
+                    "stateData": {
+                        "t1.$": "States.ArrayGetItem($[*].output.stateData.t1, 0)",
+                        "t3.$": "States.ArrayGetItem($[*].output.stateData.t3, 0)",
+                        "t6.$": "States.ArrayGetItem($[*].output.stateData.t6, 0)"
+                    }
+                }
             },
-            "ResultPath": "$.result",
-            "OutputPath": "$",
             "Next": "Output"
         },
         "Output": {

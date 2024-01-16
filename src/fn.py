@@ -11,7 +11,7 @@ patch_all()
 
 def handler(event, context):
     print(json.dumps(event))
-    duration = event.get("duration", 30)
-    time.sleep(duration)
+    # duration = event.get("duration", 30)
+    # time.sleep(duration)
     output = event
     return output
